@@ -1,7 +1,10 @@
+import json
 from typing import Dict
 
-# Временное хранилище (дальше PostgreSQL)
-user_settings: Dict[int, Dict] = {}
+
+def load_database():
+    with open('app/database.json', 'r', encoding='utf-8') as file:
+        return json.load(file)
 
 
 def get_user_settings(user_id: int) -> Dict:
@@ -25,11 +28,21 @@ def update_language_setting(user_id: int, language: str):
 
 def get_current_settings_message(user_id: int) -> str:
     settings = get_user_settings(user_id)
-    notifications = "✔️ включены" if settings['notifications'] else "❌ выключены"
-    language = "🇷🇺 Русский" if settings['language'] == 'ru' else "🇬🇧 English"
-
+    notifications = '✔️ включены' if settings['notifications'] else '❌ выключены'
+    language = '🇷🇺 Русский' if settings['language'] == 'ru' else '🇬🇧 English'
     return (
-        f"Текущие настройки:\n\n"
-        f"🔔 Уведомления: {notifications}\n"
-        f"🌐 Язык: {language}"
+        f'Текущие настройки:\n\n'
+        f'🔔 Уведомления: {notifications}\n'
+        f'🌐 Язык: {language}'
     )
+
+
+# Временное хранилище
+user_settings: Dict[int, Dict] = {}
+
+DATABASE = load_database()
+
+BOT_COMMANDS = [
+    ('/start', 'Запустить бота'),
+    ('/help', 'Показать список команд')
+]
