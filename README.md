@@ -17,9 +17,9 @@
 ## Технический стек
 
 - Python 3.12.7
+- sqlite3
 - aiogram 3
 - python-dotenv
-- JSON
 
 ## Схемы процессов
 
@@ -105,7 +105,7 @@ python run.py
 ```
 TAQBot/
 ├── app/
-│   ├── database.json  # База вопросов
+│   ├── database.db    # База данных бота
 │   ├── database.py    # Работа с данными
 │   ├── handlers.py    # Обработчики сообщений
 │   └── keyboards.py   # Клавиатуры бота
